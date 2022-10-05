@@ -4,12 +4,9 @@ import com.googlecode.lanterna.screen.Screen;
 import java.io.IOException;
 
 public class Hero {
-    private int x;
-    private int y;
-
-    public Hero(int x, int y) {
-        this.x = x;
-        this.y = y;
+    private Position position;
+    public Hero(Position position) {
+        this.position = position;
     }
     public void draw(Screen screen) throws IOException {
         screen.setCharacter(x, y, TextCharacter.fromCharacter('X')[0]);
@@ -24,6 +21,6 @@ public class Hero {
         x -= 1;
     }
     public void moveRight() throws IOException{
-        this.x += 1;
+        x += 1;
     }
 }
