@@ -10,8 +10,7 @@ import java.io.IOException;
 
 public class Game {
     private Screen screen;
-    private int x = 10;
-    private int y = 10;
+    Hero hero = new Hero(10, 10);
     public Game(){
         try {
             Terminal terminal = new DefaultTerminalFactory().createTerminal();
@@ -25,7 +24,7 @@ public class Game {
     }
     private void draw() throws IOException{
         screen.clear();
-        screen.setCharacter(x, y, TextCharacter.fromCharacter('X')[0]);
+        hero.draw(screen);
         screen.refresh();
     }
     public void run() throws IOException{
@@ -38,19 +37,19 @@ public class Game {
             break;}
         }
     }
-    private void processKey(KeyStroke key) {
+    private void processKey(KeyStroke key) throws IOException{
         switch (key.getKeyType()){
             case ArrowRight:
-                this.x += 1;
+                hero.moveRight();
                 break;
             case ArrowLeft:
-                this.x -= 1;
+                hero.moveLeft();
                 break;
             case ArrowUp:
-                this.y -= 1;
+                hero.moveUp();
                 break;
             case ArrowDown:
-                this.y += 1;
+                hero.moveDown();
                 break;
         }
     }
