@@ -13,6 +13,7 @@ public class Game {
     private Arena arena;
     public Game(){
         try {
+            arena = new Arena(50,20);
             Terminal terminal = new DefaultTerminalFactory().createTerminal();
             this.screen = new TerminalScreen(terminal);
             screen.setCursorPosition(null);
