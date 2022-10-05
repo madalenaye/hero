@@ -38,19 +38,22 @@ public class Game {
             break;}
         }
     }
+    private void moveHero(Position position) {
+        hero.setPosition(position);
+    }
     private void processKey(KeyStroke key) throws IOException{
         switch (key.getKeyType()){
             case ArrowRight:
-                hero.moveRight();
+                moveHero(hero.moveRight());
                 break;
             case ArrowLeft:
-                hero.moveLeft();
+                moveHero(hero.moveLeft());
                 break;
             case ArrowUp:
-                hero.moveUp();
+                moveHero(hero.moveUp());
                 break;
             case ArrowDown:
-                hero.moveDown();
+                moveHero(hero.moveDown());
                 break;
         }
     }
