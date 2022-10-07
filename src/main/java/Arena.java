@@ -1,7 +1,4 @@
-import com.googlecode.lanterna.TerminalPosition;
-import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.TextCharacter;
-import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.*;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 
@@ -15,15 +12,6 @@ public class Arena {
         this.width = width;
         this.height = height;
         hero = new Hero(10,10);
-    }
-    public boolean canHeroMove(Position position){
-        if (position.getX() < 0 || position.getX() >= width) return false;
-        if (position.getY() < 0 || position.getY() >= height) return false;
-        return true;
-    }
-    private void moveHero(Position position) {
-        if (canHeroMove(position))
-            hero.setPosition(position);
     }
     public void processKey(KeyStroke key) throws IOException{
         switch (key.getKeyType()){
@@ -41,8 +29,16 @@ public class Arena {
                 break;
         }
     }
-    public void draw(TextGraphics graphics) throws IOException {
-        graphics.setBackgroundColor(TextColor.Factory.fromString("#336699"));
+    public boolean canHeroMove(Position position){
+        if (position.getX() < width && position.getY() < height && position.getX() >= 0 && position.getY() >= 0) {return true;}
+        return false;
+    }
+    private void moveHero(Position position) {
+        if (canHeroMove(position)) {hero.setPosition(position);}
+    }
+
+    public void draw(TextGraphics graphics){
+        graphics.setBackgroundColor(TextColor.Factory.fromString("#f56969"));
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width, height), ' ');
         this.hero.draw(graphics);
     }
