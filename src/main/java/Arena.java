@@ -55,6 +55,7 @@ public class Arena {
                 moveHero(hero.moveDown());
                 break;
         }
+        retrieveCoins();
     }
 
     public void draw(TextGraphics graphics){
@@ -74,6 +75,13 @@ public class Arena {
     }
     private void moveHero(Position position) {
         if (canHeroMove(position)) {hero.setPosition(position);}
+    }
+    private void retrieveCoins() {
+        for (int i = coins.size()-1; i >= 0; i--){
+            if (coins.get(i).getPosition().equals(hero.getPosition())){
+                coins.remove(coins.get(i));
+            }
+        }
     }
 
 }
