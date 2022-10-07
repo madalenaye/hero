@@ -5,17 +5,20 @@ import com.googlecode.lanterna.input.KeyStroke;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Arena {
     private int width;
     private int height;
     private Hero hero;
     private List<Wall> walls;
+    private List<Coin> coins;
     public Arena(int width, int height) {
         hero = new Hero(10,10);
         this.width = width;
         this.height = height;
         this.walls = createWalls();
+        this.coins = createCoins();
     }
     private List<Wall> createWalls() {
         List<Wall> walls = new ArrayList<>();
@@ -28,6 +31,14 @@ public class Arena {
             walls.add(new Wall(width - 1, r));
         }
         return walls;
+    }
+    private List<Coin> createCoins() {
+        Random random = new Random();
+        ArrayList<Coin> coins = new ArrayList<>();
+        for (int i = 0; i < 5; i++)
+            coins.add(new Coin(random.nextInt(width - 2) + 1,
+                    random.nextInt(height - 2) + 1));
+        return coins;
     }
     public void processKey(KeyStroke key) throws IOException{
         switch (key.getKeyType()){
@@ -51,6 +62,8 @@ public class Arena {
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width, height), ' ');
         for (Wall wall : walls)
             wall.draw(graphics);
+        for (Coin coin: coins)
+            coin.draw(graphics);
         this.hero.draw(graphics);
     }
     public boolean canHeroMove(Position position){

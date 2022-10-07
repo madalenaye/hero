@@ -7,6 +7,7 @@ public class Hero extends Element{
     public void setPosition(Position position){this.position = position;}
     public Position getPosition(){return this.position;}
     public Hero(int x, int y) {
+        super(x,y);
         this.position = new Position(x,y);
     }
 
